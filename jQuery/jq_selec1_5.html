@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>jq_selec1_5.html</title>
+        <script src="../js/jquery-3.5.1.min.js"></script>
+        <script>
+            $(function () {
+                var style_1 = {
+                    'background-color': 'silver',
+                    'border': '2px solid gold'
+                }
+                var style_2 ={
+                    'background-color' : 'green',
+                    'border': '2px solid violet'
+                }
+
+                $('.txt').siblings().css(style_1);
+                
+                $('.txt3').prevUntil().css(style_2); //prevUntil('여기에 어디까지 할껀지 정할 수 있음')
+                $('.txt6').nextUntil().css(style_2); //nextUntil('여기에 어디까지 할껀지 정할 수 있음')
+            });
+        </script>
+    </head>
+    <body>
+        <div id="wrap">
+            <h1>인접 관계 선택자</h1>
+            <p>내용1</p>
+            <section>
+                <h1>하위요소 선택자</h1>
+                <p>내용2</p>
+            </section>
+            <p class="txt3">내용3</p>
+            <p>내용4</p>
+            <p  class="txt">내용5</p>
+            <p class="txt6">내용6</p>
+            <p>내용7</p>
+            <p>내용8</p>
+        </div>
+    </body>
+</html>

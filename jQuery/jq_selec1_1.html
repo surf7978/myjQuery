@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jq_selec1_1.html</title>
+    <script src="../js/jquery-3.5.1.min.js"></script>
+    <script>
+        $(function(){
+            $("*").css("border","1px solid blue");
+            $('#tit3,h1').css("background-color", "gold").css('border','4px dotted red');
+            $('h1.tit').css("background-color", "violet").css('border','4px dotted black');
+            $('h2').next().css("color", "violet");
+            $('h2').parent().css("color", "red");
+        });
+    </script>
+</head>
+<body>
+    <h1>제이쿼리</h1>
+    <h2>선택자</h2>
+    <h3 id="tit3">직접 선택자</h3>
+    <h3>인접 선택자</h3>
+    <h1 class="tit">제이쿼리</h1>
+    <h2>선택자</h2>
+    <h3 class="tit">직접 선택자</h3>
+    <h3>인접 선택자</h3>
+</body>
+</html>

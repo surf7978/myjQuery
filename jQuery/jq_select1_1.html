@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>210111</title>
+    <script src="../js/jquery-3.5.1.min.js"></script>
+    <script>
+        let persons = [];
+        persons.push('Hong');
+        persons.push('Hwang');
+        persons.push('Park');
+
+        $(document).ready(function(){
+            // let pTag = document.createElement('p');
+            // let id = document.createElement('p');
+            // id.append(pTag);
+
+            let ulTag =  $('<ul />').attr('id','main');
+
+            // $('#p').append($('<p />').attr('id', 'first'));
+
+            //JS의 forEach
+            // persons.forEach(function(a,b,c){
+            //     console.log(a,b,c);
+            // });
+            //jQ의 같은 뜻
+            $.each(persons, function(a,b){ //+추가 a=idx, b=item, jQ에서는 c=Ary값 없음
+                console.log(a,b);
+                ulTag.append($('<li />').html(b));
+            });
+            console.log(ulTag);
+            $('body').append(ulTag);
+
+
+
+            let table = $('<table border="1" style="text-align:center;" />').attr('id','tbl');
+            $(persons).each(function(a,b){ //persons를 $안에 넣어도 됨
+                let tr = $('<tr />');
+                $(tr).mouseover(function(){
+                    //console.log($(this)); //$(this)=tr
+                    $(this).css('background-color','yellow');
+                    //$(this).css('background','yellow');
+                });
+                $(tr).mouseout(function(){
+                    //$(this).css('background','none');
+                    $(this).css('background-color','');
+                    //$(this).css('background-color','tansparent'); //tansparent=투명
+                });
+
+                let td = $('<td />').html(b);
+                tr.append(td);
+
+                let btnTag= $('<td />');
+                let btn = $('<button />').html('삭제');
+                $(btn).click(function(){ //jQ의 click = JS의 onclick
+                    //$(tr).remove(); //each로 만들어서 해당 버튼의 tr만 사라짐
+                    //정답
+                    $(this).parent().parent().remove();
+                }); 
+                btnTag.append(btn);
+                tr.append(btnTag);
+
+                table.append(tr);
+            });
+            $('body').append(table);
+
+        });
+    </script>
+</head>
+<body>
+    <!-- <div id="p"></div>
+    <div class="p"></div>
+    <div class="p"></div> -->
+</body>
+</html>

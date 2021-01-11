@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>insertBoard.html</title>
+</head>
+<body>
+	<form action="insertBoard" method="GET">
+		<label for="title" style="padding:15px; font-size:40px;">제목 : </label>
+		<input type="text" name='title' style="padding:15px; font-size:30px;">
+		<br>
+		<label for="content" style="padding:15px; font-size:40px;">내용 : </label>
+		<input type="text" id="content" name='content' style='padding:15px; font-size:30px;'>
+		<br>
+		<label for="writer" style="padding:15px; font-size:40px;">작가 : </label>
+		<input type="text" name='writer' style="padding:15px; font-size:30px;">
+		<p></p>
+		<input type="button" id="btn" value="저장" style="padding:15px; font-size:30px;">
+		<input type="reset" value="취소" style="padding:15px; font-size:30px;">
+	</form>
+	
+	<script>
+		document.getElementById('btn').onclick = function(){
+			let title = document.querySelectorAll('input[name="title"]')[0].value;
+			let content = document.getElementById('content').value;
+			let writer = document.getElementsByTagName('input')[2].value; //여러가지 방법으로 get따옴(id가 제일 직관적임)
+			let xhtp = new XMLHttpRequest();
+			let url = '../insertBoard?title='+title+'&content='+content+'&writer='+writer;
+			xhtp.open('get', url);
+			xhtp.send();
+			xhtp.onload = function(){
+				console.log(xhtp.responseText);	
+			}
+		};
+	</script>
+</body>
+</html>

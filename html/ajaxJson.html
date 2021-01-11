@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>html/ajaxJson.html</title>
+    </head>
+    <body>
+        <script>
+        	//let json={
+        	//		'name':'john',
+        	//		'age':30,
+        	//		'cars':['Ford','BMW','Fiat']
+        	//}	
+        	//consol.log(json.cars[0]);
+        
+            let xhtp = new XMLHttpRequest();
+        	//xhtp.open('get', '../data/MOCK_DATA');
+            xhtp.open('get', '../EmpListJsonServlet');
+            xhtp.send();
+            xhtp.onload = function () {
+                let data = xhtp.response;
+                let obj = JSON.parse(data);
+                //console.log(JSON.parse(data));
+                let ulTag = document.createElement('ul');
+                for (let i = 0; i < obj.length; i++) {
+                    console.log(obj[i].id, obj[i].firstName, obj[i].lastName, obj[i].email, obj[i].salary);
+                    let liTag = document.createElement('li');
+                    let val = obj[i].id+","+obj[i].firstName+","+obj[i].lastName+","+obj[i].email+","+obj[i].salary;
+                    let tNode = document.createTextNode(val);
+                    console.log(val)
+                    liTag.appendChild(tNode);
+                    ulTag.appendChild(liTag);
+                }
+            }
+        </script>
+    </body>
+</html>

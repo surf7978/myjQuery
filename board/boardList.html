@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>boardList.html</title>
+		<script src="../js/showPage.js"></script>
+	</head>
+<body>
+	<iframe src="insertBoard.html" style="width:600px; height:350px;"></iframe>
+	<div id="show"></div>
+	<input type="button" id="btn" name="title" value="테이블 출력" style="padding:15px; font-size:30px;">
+	<div id="show1"></div>
+<!-- 화면에 게시판데이터를 table형식으로 화면에 보여주도록 코딩쓰 -->
+<!-- 팁 : DAO에 리스트 조회하는 메소드 만들기 Servlet으로 ajax호출(XMLHttpRequest())-->
+	<script>
+	
+	let xhtp = new XMLHttpRequest();
+	xhtp.open('get', '../showBoardList');
+	xhtp.send();
+	xhtp.onload = showPage;
+	
+	document.getElementById('btn').onclick = function(){
+		let xhtp1 = new XMLHttpRequest();
+		xhtp1.open('get', '../showBoardList');
+		xhtp1.send();
+		xhtp1.onload = showContent;
+		function showContent(){
+			//이전테이블삭제
+			let clear = document.getElementById('show1');
+		    clear.innerHTML = ' ';
+			console.log(xhtp1.responseXML); 
+			//연결쓰
+			let doc = xhtp1.responseXML;//XML타입으로 가져옴
+			let result = doc.getElementsByTagName('record');
+			//테이블선언
+            let tableTag = document.createElement('table');
+            tableTag.setAttribute('border', '1');
+            tableTag.setAttribute('style', 'background-color:silver; cursor: grab;');
+			//테이블헤드부분
+            let headerTrTag = document.createElement('tr');
+            for(let i=0; i<result[0].childNodes.length; i++){
+                let thTag = document.createElement('th');
+                thTag.setAttribute('style','text-align:center; padding:15px; color: white; background-color: gray;');
+                let textNode = document.createTextNode(result[0].childNodes[i].nodeName.toUpperCase().replace('_',' '));
+                thTag.append(textNode);
+                headerTrTag.append(thTag);
+            }
+            tableTag.append(headerTrTag);
+			//테이블내용
+            for(let i=0; i<result.length; i++){
+                let trTag = document.createElement('tr');
+                for(let j=0; j<result[i].childNodes.length; j++){
+                    let tdTag = document.createElement('td');
+                    tdTag.setAttribute('style','text-align:center; padding:15px; background-color: white;');
+                    let textNode = document.createTextNode(result[i].childNodes[j].childNodes[0].nodeValue);
+                    tdTag.append(textNode);
+                    trTag.append(tdTag);
+                }
+                tableTag.append(trTag);
+            }
+            document.getElementById('show1').append(tableTag);//위에 <body>에 만들어줘야함
+		}
+	};
+	</script>
+</body>
+</html>

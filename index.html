@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Employees</title>
+</head>
+<body>
+	<h1 style="text-align: center">Employee테이블</h1>
+	<center><div id="show"></div></center>
+	<script>
+		let xhtp = new XMLHttpRequest();
+		xhtp.open('get', 'home'); //home위치에있는거 get
+		xhtp.send();
+		xhtp.onload = showContent;
+		
+		function showContent(){
+			//연결쓰
+			console.log(xhtp.responseXML); 
+			let doc = xhtp.responseXML;//XML타입으로 가져옴
+			let result = doc.getElementsByTagName('record');
+			//콘솔확인쓰
+			console.log(result[0].firstChild.nodeValue); //ids가 getElements라서 배열임 그래서 [0]으로 조회해야함
+			console.log(result);
+			
+			//테이블선언
+            let tableTag = document.createElement('table');
+            tableTag.setAttribute('border', '1');
+            tableTag.setAttribute('style', 'background-color:silver; cursor: grab;');
+			//테이블헤드부분
+            let headerTrTag = document.createElement('tr');
+            for(let i=0; i<result[0].childNodes.length; i++){
+                let thTag = document.createElement('th');
+                thTag.setAttribute('style','text-align:center; padding:15px; color: white; background-color: gray;');
+                let textNode = document.createTextNode(result[0].childNodes[i].nodeName.toUpperCase().replace('_',' '));
+                thTag.append(textNode);
+                headerTrTag.append(thTag);
+            }
+            tableTag.append(headerTrTag);
+			//테이블내용
+            for(let i=0; i<result.length; i++){
+                let trTag = document.createElement('tr');
+                for(let j=0; j<result[i].childNodes.length; j++){
+                    let tdTag = document.createElement('td');
+                    tdTag.setAttribute('style','text-align:center; padding:15px; background-color: white;');
+                    let textNode = document.createTextNode(result[i].childNodes[j].childNodes[0].nodeValue);
+                    tdTag.append(textNode);
+                    trTag.append(tdTag);
+                }
+                tableTag.append(trTag);
+            }
+            document.getElementById('show').append(tableTag);//위에 <body>에 만들어줘야함
+		}
+		//오라클 SQL 디벨로퍼에서 테이블생성후 다음 예제 실습 
+		//SQL문구 : create table boards (board_no number primary key, title varchar2(100), content varchar2(1000), writer varchar2(100), creation_date date);
+        //http://localhost:8088/AjaxWeb/insertBoard?title=test&content=test2&writer=test3 주소창에 이거 치면 이제 입력됨(디벨로퍼로 확인가능)
+	</script>
+</body>
+</html>

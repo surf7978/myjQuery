@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>html/employeeForm2.html</title>
+<script src="../js/showPage2.js"></script>
+</head>
+<body>
+	<table>
+		<tr>
+			<td><input id="updateId" type="text" name="updateId" value="597"
+				style="font-size: 25px;"></td>
+			<td style="font-size: 25px; width: 350px; height: 20px;"></td>
+			<td style="font-size: 25px; text-align: center;">Employee_id</td>
+			<td id="clickEmpId"
+				style="background-color: silver; width: 350px; height: 20px; font-size: 25px;"></td>
+		</tr>
+		<tr>
+			<td><input id="updatefName" type="text" name="updatefName"
+				value="Killdong" style="font-size: 25px;"></td>
+			<td><input id="fName" type="text" name="fName" value="gildong"
+				style="font-size: 25px;"></td>
+			<td style="font-size: 25px; text-align: center;">First_Name</td>
+			<td id="clickfName"
+				style="background-color: silver; width: 350px; height: 20px; font-size: 25px;"></td>
+		</tr>
+		<tr>
+			<td><input id="updatelName" type="text" name="updatelName"
+				value="Gwang" style="font-size: 25px;"></td>
+			<td><input id="lName" type="text" name="lName" value="Hong"
+				style="font-size: 25px;"></td>
+			<td style="font-size: 25px; text-align: center;">Last_Name</td>
+			<td id="clicklName"
+				style="background-color: silver; width: 350px; height: 20px; font-size: 25px;"></td>
+		</tr>
+		<tr>
+			<td><input id="updateemail" type="text" name="updateemail"
+				value="GKD" style="font-size: 25px;"></td>
+			<td><input id="email" type="text" name="email" value="HGD"
+				style="font-size: 25px;"></td>
+			<td style="font-size: 25px; text-align: center;">Email</td>
+			<td id="clickemail"
+				style="background-color: silver; width: 350px; height: 20px; font-size: 25px;"></td>
+		</tr>
+		<tr>
+			<td><input id="updatepNumber" type="text" name="updatepNumber"
+				value="010.7777.9999" style="font-size: 25px;"></td>
+			<td><input id="pNumber" type="text" name="pNumber"
+				value="010.1111.2222" style="font-size: 25px;"></td>
+			<td style="font-size: 25px; text-align: center;">Phone_Number</td>
+			<td id="clickpNumber"
+				style="background-color: silver; width: 350px; height: 20px; font-size: 25px;"></td>
+		</tr>
+		<tr>
+			<td><input id="updatehireDate" type="text" name="updatehireDate"
+				value="2077-07-07" style="font-size: 25px;"></td>
+			<td><input id="hireDate" type="text" name="hireDate"
+				style="font-size: 25px;"></td>
+			<td style="font-size: 25px; text-align: center;">Hire_Date</td>
+			<td id="clickhireDate"
+				style="background-color: silver; width: 350px; height: 20px; font-size: 25px;"></td>
+		</tr>
+		<tr>
+			<td><input id="updatejId" type="text" name="updatejId"
+				value="ET" style="font-size: 25px;"></td>
+			<td><input id="jId" type="text" name="jId" value="IT"
+				style="font-size: 25px;"></td>
+			<td style="font-size: 25px; text-align: center;">Job_Id</td>
+			<td id="clickjId"
+				style="background-color: silver; width: 350px; height: 20px; font-size: 25px;"></td>
+		</tr>
+		<tr>
+			<td><input id="updatesalary" type="text" name="updatesalary"
+				value="99999" style="font-size: 25px;"></td>
+			<td><input id="salary" type="text" name="salary" value="7000"
+				style="font-size: 25px;"></td>
+			<td style="font-size: 25px; text-align: center;">Salary</td>
+			<td id="clicksalary"
+				style="background-color: silver; width: 350px; height: 20px; font-size: 25px;"></td>
+		</tr>
+		<tr>
+			<td><button id="updatebtn" onclick="updateBtn()"
+					style="padding: 10px; text-align: center; font-size: 25px;">정보수정</button></td>
+			<td><button id="btn" onclick="saveBtn()"
+					style="padding: 10px; text-align: center; font-size: 25px;">정보추가</button></td>
+		</tr>
+	</table>
+	<div id="show"></div>
+	<table>
+		<tr>
+			<td><input id="showId" type="text" name="updateId"
+				style="font-size: 25px; background-color:gold;"></td>
+		</tr>
+		<tr>
+			<td><input id="showfName" type="text" name="updatefName"
+				style="font-size: 25px; background-color:gold;"></td>
+		</tr>
+		<tr>
+			<td><input id="showlName" type="text" name="updatelName"
+				style="font-size: 25px; background-color:gold;"></td>
+		</tr>
+		<tr>
+			<td><input id="showemail" type="text" name="updateemail"
+				style="font-size: 25px; background-color:gold;"></td>
+		</tr>
+		<tr>
+			<td><input id="showpNumber" type="text" name="updatepNumber"
+				style="font-size: 25px; background-color:gold;"></td>
+		</tr>
+		<tr>
+			<td><input id="showhireDate" type="text" name="updatehireDate"
+				style="font-size: 25px; background-color:gold;"></td>
+		</tr>
+		<tr>
+			<td><input id="showjId" type="text" name="updatejId"
+				style="font-size: 25px; background-color:gold;"></td>
+		</tr>
+		<tr>
+			<td><input id="showsalary" type="text" name="updatesalary"
+				style="font-size: 25px; background-color:gold;"></td>
+		</tr>
+	</table>
+	<script>
+		function updateBtn() {
+			let updateId = document.getElementById('updateId').value;
+			let updatefName = document.getElementById('updatefName').value;
+			let updatelName = document.getElementById('updatelName').value;
+			let updateemail = document.getElementById('updateemail').value;
+			let updatepNumber = document.getElementById('updatepNumber').value;
+			let updatehireDate = document.getElementById('updatehireDate').value;
+			let updatejId = document.getElementById('updatejId').value;
+			let updatesalary = document.getElementById('updatesalary').value;
+
+			let updateReq = new XMLHttpRequest();
+
+			//get방식출력
+			let url = '../UpdateEmpServlet?updateId=' + updateId //
+					+ '&updatefName=' + updatefName //
+					+ "&updatelName=" + updatelName //
+					+ "&updateemail=" + updateemail //
+					+ "&updatepNumber="+ updatepNumber //
+					+ "&updatehireDate=" + updatehireDate //
+					+ "&updatejId="+ updatejId //
+					+ "&updatesalary=" + updatesalary;
+			console.log(url);
+			updateReq.open('get', url);
+			updateReq.send();
+
+			//host방식출력
+			//let url = 'updateId=' + updateId //
+			//		+ '&updatefName=' + updatefName //
+			//		+ "&updatelName=" + updatelName //
+			//		+ "&updateemail=" + updateemail //
+			//		+ "&updatepNumber=" + updatepNumber //
+			//		+ "&updatehireDate=" + updatehireDate //
+			//		+ "&updatejId=" + updatejId //
+			//		+ "&updatesalary=" + updatesalary;
+			//updateReq.open('post', '../UpdateEmpServlet?');
+			//updateReq.setRequestHeader('Content-type','application/x-www-form-rulencoded');
+			//updateReq.send(url);
+
+			updateReq.onload = function() {
+				//alert(updateReq.responseText); //OK,NG문구 출력
+				window.location.reload();//페이지 재실행해서 업데이트된거 보여줌
+			}
+		}
+
+		function saveBtn() {
+			console.log(this);
+
+			let fName = document.getElementById('fName').value;
+			let lName = document.getElementById('lName').value;
+			let email = document.getElementById('email').value;
+			let pNumber = document.getElementById('pNumber').value;
+			let jId = document.getElementById('jId').value;
+			let salary = document.getElementById('salary').value;
+
+			let saveReq = new XMLHttpRequest();
+
+			let url = '../PutEmpServlet?fName=' + fName + "&lName=" + lName //
+					+ "&email=" + email + "&pNumber=" + pNumber //
+					+ "&salary=" + salary + "&jId=" + jId;
+			saveReq.open('get', url);
+			saveReq.send();
+			saveReq.onload = function() {
+				console.log(saveReq.responseXML);
+				let doc = saveReq.responseXML;
+				let result = doc.getElementsByTagName('result');
+				console.log(result);
+				console.log(result[0].childNodes);
+
+				//정보추가
+				let trTag = document.createElement('tr');
+				for (let i = 0; i < result[0].childNodes.length; i++) {
+					let tdTag = document.createElement('td');
+					tdTag
+							.setAttribute('style',
+									'padding:10px; text-align: center; background-color:gold;');
+					let val = result[0].childNodes[i].firstChild.nodeValue;
+					let tNode = document.createTextNode(val);
+					tdTag.appendChild(tNode);
+					trTag.appendChild(tdTag);
+				}
+				document.getElementById('tbl').appendChild(trTag);
+
+				//정보추가 눌렀을때 삭제, 수정 버튼 추가되는것
+				addDelBtn(trTag, delFunc);
+				addUpdBtn(trTag, updateFunc);//여기에 수정하고 싶었는데 못함
+			}
+		}
+
+		let xhtp = new XMLHttpRequest();
+		xhtp.open('get', '../home'); //home=Servlet파일명(내가 설정해준 것)의 경로를 지정해줘야함(../)
+		xhtp.send();
+		xhtp.onload = showPage;
+
+		document.getElementById('hireDate').value = new Date().toISOString()
+				.substring(0, 10);
+	</script>
+</body>
+</html>

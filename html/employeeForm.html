@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>html/employeeForm.html</title>
+		<script src="../js/showPage2.js"></script>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<td>First_Nmae</td>
+				<td><input id="fName" type="text" name="fNmae" value="hala"></td>
+			</tr>
+			<tr>
+				<td>Last_Nmae</td>
+				<td><input id="lName" type="text" name="lNmae" value="Hwang"></td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td><input id="email" type="text" name="email" value="ABC"></td>
+			</tr>
+			<tr>
+				<td>Phone_Number</td>
+				<td><input id="phoneNumber"type="text" name="phoneNumber" value="010.1234.5678"></td>
+			</tr>
+			<tr>
+				<td>Hire_Date</td>
+				<td><input id="hireDate"type="text" name="hireDate"></td>
+			</tr>
+			<tr>
+				<td>Job_Id</td>
+				<td><input id="jobId"type="text" name="jobId" value="IT_2"></td>
+			</tr>
+			<tr>
+				<td>Salary</td>
+				<td><input id="salary"type="text" name="salary" value="7000"></td>
+			</tr>
+			<tr>
+				<td><button id="btn" onclick="saveBtn()">저장</button></td>
+			</tr>
+		</table>
+		<div id="show"></div>
+		<script>
+			function saveBtn(){
+				console.log(this);
+				
+				let fName = document.getElementById('fName').value;
+				let lName = document.getElementById('lName').value;
+				let email = document.getElementById('email').value;
+				let phoneNumber = document.getElementById('phoneNumber').value;
+				let salary = document.getElementById('salary').value;
+				let jobId = document.getElementById('jobId').value;
+				
+				let saveReq = new XMLHttpRequest();
+				
+				let url = '../PutEmpServlet?fName='+fName+"&lName="+lName //
+						+"&email="+email+"&phoneNumber="+phoneNumber //
+						+"&salary="+salary+"&jobId="+jobId;
+				saveReq.open('get', url);
+				saveReq.send();
+				saveReq.onload = function(){
+					console.log(saveReq.responseXML);
+					
+					//화면구성 tr, td*5(button) => tbl.appendChild(tr); 사용해서 구현하기
+					let trTag = document.createElement('tr');
+					//0. employee_id
+					let tdTag = document.createElement('td');
+					let val  = 999;
+					let textNode = document.createTextNode(val);
+					tdTag.appendChild(textNode);
+					trTag.appendChild(tdTag);
+					//1. first_name
+					tdTag = document.createElement('td');
+					val  = document.getElementById('fName').value;
+					textNode = document.createTextNode(val);
+					tdTag.appendChild(textNode);
+					trTag.appendChild(tdTag);
+					//2. last_name
+					tdTag = document.createElement('td');
+					val  = document.getElementById('lName').value;
+					textNode = document.createTextNode(val);
+					tdTag.appendChild(textNode);
+					trTag.appendChild(tdTag);
+					//3. email
+					tdTag = document.createElement('td');
+					val  = document.getElementById('email').value;
+					textNode = document.createTextNode(val);
+					tdTag.appendChild(textNode);
+					trTag.appendChild(tdTag);
+					//4. phone_number
+					tdTag = document.createElement('td');
+					val  = document.getElementById('phoneNumber').value;
+					textNode = document.createTextNode(val);
+					tdTag.appendChild(textNode);
+					trTag.appendChild(tdTag);
+					//6. hire_date
+					tdTag = document.createElement('td');
+					
+					val  = document.getElementById('hireDate').value;
+					textNode = document.createTextNode(val);
+					tdTag.appendChild(textNode);
+					trTag.appendChild(tdTag);
+					//6. salary
+					tdTag = document.createElement('td');
+					val  = document.getElementById('salary').value;
+					textNode = document.createTextNode(val);
+					tdTag.appendChild(textNode);
+					trTag.appendChild(tdTag);
+					//7. jobId
+					tdTag = document.createElement('td');
+					val  = document.getElementById('jobId').value;
+					textNode = document.createTextNode(val);
+					tdTag.appendChild(textNode);
+					trTag.appendChild(tdTag);
+					//8. 삭제버튼
+					tdTag = document.createElement('td');
+					let btn = document.createElement('button');
+					btn.setAttribute('onclick', 'FastdelFunc()');
+					btn.innerHTML = '삭제';
+					tdTag.appendChild(btn);
+					trTag.appendChild(tdTag);
+					
+					document.getElementById('tbl').appendChild(trTag);
+				}
+			}
+			
+			let xhtp = new XMLHttpRequest();
+			xhtp.open('get', '../home'); //home=Servlet파일명(내가 설정해준 것)의 경로를 지정해줘야함(../)
+			xhtp.send();
+			xhtp.onload = showPage;
+			
+			document.getElementById('hireDate').value = new Date().toISOString().substring(0, 10);
+			
+		</script>
+	</body>
+</html>
