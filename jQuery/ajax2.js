@@ -1,39 +1,103 @@
-$.ajax({
-    url: '../data/MOCK_DATA.json', 
+$(function () { 
+    $.ajax({
+        url: '../data/MOCK_DATA.json', 
         dataType: 'json', 
-        success: showContent ,
-    error: function (result) {
-        console.log('error '+result.status+' '+result.statusText); //에러뜬거 콘솔에서 경로 확인후 이거 뜨게 하기
-    }
+        success: showContent,
+        error: function (url) {
+            console.log('error '+url.status+' '+url.statusText); //에러뜬거 콘솔에서 경로 확인후 이거 뜨게 하기
+        }
+    });
+    //button 클릭한 것 삭제 이벤트
+    $('#btn').on('click', function(){
+        //헤드 체크박스는 삭제안되게 하기
+        // if($('input:checked').attr('id','all_check')){
+        // }else{
+        // }
+        $('input:checked').parent().parent().remove();
+    });
+    //all_check 클릭 이벤트
+    $('body').on('click', '#all_check', function(){ //이렇게 하기 싫으면 걍 showContent 안에다가 넣으면 됨
+        //console.log('checked'); //위치 $.ajax() 안에 하면 안됨 되게하려면 앞에$(document).해야함
+
+        //헤드에 있는 체크박스로 전체 체크 한번에 하기
+        //방법1
+        $('td>input').prop('checked', $('#all_check').is(":checked")); //참,거짓값은 prop써야함(html아님)
+
+        //방법2
+        // if($('#all_check').is(":checked")){
+        //     $('td>input').prop('checked', true);
+        // }else {
+        //     $('td>input').prop('checked', false);
+        // }
+
+    });
+    //역으로 컨텐츠에 있는거 다 체크되면 헤드체크박스 체크 되게 하기
+    //+ 만약 하나라도 체크해제 되면 헤드체크박스 해제되게 하기
+    $('body').on('click', function(){
+        console.log('클릭됨');
+        console.log($('td>input'));
+        if($('td>input:checked').length == $('td>input').length){
+            $('#all_check').prop('checked', true);
+        }else{
+            $('#all_check').prop('checked', false);
+        }
+    });
 });
 
-function showContent(result) { //result = url의 결과값
-    console.log('success', result);
-    let data = result;
-    let table = $('<table id="tbl" style="text-align: center"/>').attr('border','2px');
 
-    //테이블헤드 만드는 방법
-    let headers = ['id','first_name','last_name','email'];//, 'gender', 'address']; //ip_address안나오게하는법 2 배열을 사용하면 출력되는거 위치도 바꿀 수 있음
+function showContent(url) {
+    console.log('success', url);
+    let data = url;
+    let table = $('<table id="tbl" style="text-align: center"/>').attr(
+        'border',
+        '2px'
+    );
+
+    //테이블헤드
+    let headers = ['chkbox', 'id', 'first_name', 'last_name', 'email'];
     let tr = $('<tr />');
     for (field of headers) {
-        let th = $('<th />').html(field.replace('_',' ').toUpperCase());
+        let th = $('<th />').attr('style', 'padding:10px');
+        if(field == 'chkbox'){
+            let checkbox = $('<input />').attr('type', 'checkbox').attr('id','all_check');
+            th.append(checkbox);
+        }else{
+            th.html(field.replace('_', ' ').toUpperCase());
+        }
         tr.append(th);
     }
-    //삭제버튼 헤드
     table.append(tr);
 
+    //테이블 콘텐츠
     $(data).each(function (idx, obj) {
-        
-        if(idx < 5 ){ //데이터 너무 많으니까 idx값만큼만 출력
+        if (idx < 5) {
             let tr = $('<tr />');
-            $(tr).attr('id',obj.id);
+            $(tr).attr('id', obj.id);
+            $(tr).mouseover(function () {
+                $(this).css('background-color', 'yellow');
+            });
+            $(tr).mouseout(function () {
+                $(this).css('background-color', '');
+            });
             for (field of headers) {
-
-                let td = $('<td />').html(obj[field]);//field가 headers 따라가니까 headers 배열 바꿔주면 같이 열 바뀜
+                let td = $('<td />');
+                if (field == 'chkbox') {
+                    let checkbox = $('<input />')
+                        .attr('type', 'checkbox')
+                        .attr('id', field+idx); //chkbox 콜름에 id값 넣어줌
+                    td.append(checkbox);
+                } else {
+                    td.html(obj[field]);
+                }
                 tr.append(td);
-                table.append(tr); //if문안에 안넣으면 each 출력이라 tr 인덱스값만큼 계속 생성함
             }
+            table.append(tr);
         }
     });
     $('#show').append(table);
+
+    //all_check 클릭 이벤트
+    // $('#all_check').on('click', function(){
+    //     console.log('checked'); //위치 $.ajax() 안에 하면 안됨 되게하려면 $('#all_check')보다 상위인 body나 document에 해야함
+    // });
 }
